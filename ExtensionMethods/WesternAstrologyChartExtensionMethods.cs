@@ -1,140 +1,72 @@
 using SharpAstrology.Enums;
 using SharpAstrology.DataModels;
+using SharpAstrology.Definitions;
+using SharpAstrology.Exceptions;
 using SharpAstrology.Utility;
+using Orbits = System.Collections.Generic.Dictionary<System.Enum, System.Collections.Generic.Dictionary<SharpAstrology.Enums.Aspects, int>>;
 
 namespace SharpAstrology.ExtensionMethods;
 
+
 public static class WesternAstrologyChartExtensionMethods
 {
-    public static bool PlanetIsInSign(this WesternAstrologyChart chart,
-        Planets planet, ZodiacSigns sign, Decanates? decanate = null)
+    public static Decanates DecanateOf(this AstrologyChart chart, Planets planet)
     {
-        var longitude = chart.PlanetsPositions[planet].Longitude;
-        if (sign != AstrologyUtility.ZodiacSignOf(longitude)) return false;
-        if (decanate is null) return true;
-        var deg = longitude % 30;
-        return decanate switch
+        return (chart.PositionOf(planet).Longitude % 30) switch
         {
-            Decanates.First when deg < 10 => true,
-            Decanates.Second when deg >= 10 & deg < 20 => true,
-            Decanates.Third when deg >= 20 & deg < 30 => true,
-            _ => false
-        };
-    }
-
-    public static bool RulerIsInSign(this WesternAstrologyChart chart,
-        RulerOf ruler, ZodiacSigns sign, Dictionary<ZodiacSigns, Planets> rulership, Decanates? decanate = null)
-    {
-        if (!chart.HousesAvailable) return false;
-        var inSign = AstrologyUtility.ZodiacSignOf(chart.HousePositions.HouseCusps[ruler.ToHouse()]);
-        var planet = rulership[inSign];
-        return chart.PlanetIsInSign(planet, sign, decanate);
-    }
-
-    public static bool PlanetIsInHouse(this WesternAstrologyChart chart, 
-        Planets planet, Houses house, bool relativeSign = false)
-    {
-        if (!chart.HousesAvailable) return false;
-        if (!relativeSign) return chart.PlanetsHousePosition[planet] == house;
-        var cuspLongitude = chart.HousePositions.HouseCusps[house];
-        var planetsLongitude = chart.PlanetsPositions[planet].Longitude;
-        return AstrologyUtility.ZodiacSignOf(cuspLongitude) == AstrologyUtility.ZodiacSignOf(planetsLongitude);
-    }
-    
-    public static bool RulerIsInHouse(this WesternAstrologyChart chart, 
-        RulerOf ruler, Houses house, Dictionary<ZodiacSigns, Planets> rulership, bool relativeSign = false)
-    {
-        if (!chart.HousesAvailable) return false;
-        var inSign = AstrologyUtility.ZodiacSignOf(chart.HousePositions.HouseCusps[ruler.ToHouse()]);
-        var planet = rulership[inSign];
-        return chart.PlanetIsInHouse(planet, house, relativeSign);
-    }
-
-    public static bool HouseIsInSign(this WesternAstrologyChart chart, 
-        Houses house, ZodiacSigns sign, Decanates? decanate = null)
-    {
-        if (!chart.HousesAvailable) return false;
-        var longitude = chart.HousePositions.HouseCusps[house];
-        if (sign != AstrologyUtility.ZodiacSignOf(longitude)) return false;
-        if (decanate is null) return true;
-        var deg = longitude % 30;
-        return decanate switch
-        {
-            Decanates.First when deg < 10 => true,
-            Decanates.Second when deg >= 10 & deg < 20 => true,
-            Decanates.Third when deg >= 20 & deg < 30 => true,
-            _ => false
-        };
-    }
-
-    public static bool CrossIsInSign(this WesternAstrologyChart chart, 
-        Cross direction, ZodiacSigns sign, Decanates? decanate = null)
-    {
-        if (!chart.HousesAvailable) return false;
-        var longitude = chart.HousePositions.Cross[direction];
-        if (sign != AstrologyUtility.ZodiacSignOf(longitude)) return false;
-        if (decanate is null) return true;
-        var deg = longitude % 30;
-        return decanate switch
-        {
-            Decanates.First when deg < 10 => true,
-            Decanates.Second when deg >= 10 & deg < 20 => true,
-            Decanates.Third when deg >= 20 & deg < 30 => true,
-            _ => false
+            < 10 => Decanates.First,
+            < 20 and >= 10 => Decanates.Second,
+            < 30 and >= 20 => Decanates.Third
         };
     }
     
-    public static Aspects AspectBetween(this WesternAstrologyChart chart, 
-        Planets planet, RulerOf ruler, Dictionary<ZodiacSigns, Planets> rulership)
+    public static Decanates DecanateOf(this AstrologyChart chart, Cross direction)
     {
-        if (!chart.HousesAvailable) return Aspects.None;
-        var inSign = AstrologyUtility.ZodiacSignOf(chart.HousePositions.HouseCusps[ruler.ToHouse()]);
-        var planet2 = rulership[inSign];
-        return chart.Aspects[planet][planet2];
+        if (chart.HousePositions is null) throw new HousesNotAvailableException();
+        return (chart.HousePositions.Cross[direction] % 30) switch
+        {
+            < 10 => Decanates.First,
+            < 20 and >= 10 => Decanates.Second,
+            < 30 and >= 20 => Decanates.Third
+        };
     }
     
-    public static Aspects AspectBetween(this WesternAstrologyChart chart, 
-        RulerOf ruler1, RulerOf ruler2, Dictionary<ZodiacSigns, Planets> rulership)
+    public static Decanates DecanateOf(this AstrologyChart chart, Houses house)
     {
-        if (!chart.HousesAvailable) return Aspects.None;
-        var inSign1 = AstrologyUtility.ZodiacSignOf(chart.HousePositions.HouseCusps[ruler1.ToHouse()]);
-        var inSign2 = AstrologyUtility.ZodiacSignOf(chart.HousePositions.HouseCusps[ruler2.ToHouse()]);
-        var planet1 = rulership[inSign1];
-        var planet2 = rulership[inSign2];
-        return chart.Aspects[planet1][planet2];
-    }
-    
-    public static Aspects AspectBetween(this WesternAstrologyChart chart, 
-        RulerOf ruler, Cross direction, Dictionary<ZodiacSigns, Planets> rulership)
-    {
-        if (!chart.HousesAvailable) return Aspects.None;
-        var inSign = AstrologyUtility.ZodiacSignOf(chart.HousePositions.HouseCusps[ruler.ToHouse()]);
-        var planet = rulership[inSign];
-        return chart.Aspects[planet][direction];
-    }
-    
-    public static Motion PlanetsMotion(this WesternAstrologyChart chart, Planets planet)
-    {
-        return chart.PlanetsPositions[planet].SpeedLongitude < 0 ? Motion.Retrograde : Motion.Forward;
-    }
-    
-    public static Motion PlanetsMotion(this WesternAstrologyChart chart, RulerOf ruler, Dictionary<ZodiacSigns, Planets> rulership)
-    {
-        if (!chart.HousesAvailable) throw new ArgumentException("Cannot calculate motion for a ruler, when houses are not given.");
-        var inSign = AstrologyUtility.ZodiacSignOf(chart.HousePositions.HouseCusps[ruler.ToHouse()]);
-        var planet = rulership[inSign];
-        return chart.PlanetsPositions[planet].SpeedLongitude < 0 ? Motion.Retrograde : Motion.Forward;
+        if (chart.HousePositions is null) throw new HousesNotAvailableException();
+        return (chart.HousePositions.HouseCusps[house] % 30) switch
+        {
+            < 10 => Decanates.First,
+            < 20 and >= 10 => Decanates.Second,
+            < 30 and >= 20 => Decanates.Third
+        };
     }
 
-    public static Houses GetHouseOf(this WesternAstrologyChart chart, Planets planet)
+    public static Aspects AspectBetween(this AstrologyChart chart, Planets planet1, Planets planet2, Orbits? orbits=null)
     {
-        return AstrologyUtility.HouseOf(chart.PlanetsPositions[planet].Longitude, chart.HousePositions.HouseCusps);
+        orbits ??= WesternAstrologyDefaults.PlanetsDefaultOrbits;
+        if (planet1 == planet2) return Aspects.None;
+        var angle = AstrologyUtility.AngleDifference(chart.PositionOf(planet1).Longitude, chart.PositionOf(planet2).Longitude);
+        foreach (var aspect in Enum.GetValues<Aspects>())
+        {
+            if (aspect == Aspects.None) continue;
+            var maxOrbit = Math.Max(orbits[planet1][aspect], orbits[planet2][aspect]);
+            var deg = aspect.ToAngle();
+            var inAspect = deg - maxOrbit <= angle && angle <= deg + maxOrbit;
+            if (inAspect) return aspect;
+        }
+        return Aspects.None;
     }
-    
-    public static Houses GetHouseOf(this WesternAstrologyChart chart, Cross direction)
+
+    public static Dictionary<Planets, Dictionary<Planets, Aspects>> CalculateAspects(this AstrologyChart chart, Orbits? orbits=null)
     {
-        if (!chart.HousesAvailable) throw new ArgumentException("Cannot calculate house position, when houses are not available.");
-        var longitude = chart.HousePositions.Cross[direction];
-        return AstrologyUtility.HouseOf(longitude, chart.HousePositions.HouseCusps);
+        orbits ??= WesternAstrologyDefaults.PlanetsDefaultOrbits;
+        var result = new Dictionary<Planets, Dictionary<Planets, Aspects>>();
+        foreach (var planet in chart.SupportedObjects)
+        {
+            result[planet] = chart.SupportedObjects.ToDictionary(p => p, p => chart.AspectBetween(planet, planet, orbits));
+        }
+
+        return result;
     }
 }

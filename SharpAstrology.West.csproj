@@ -6,8 +6,23 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <PackageId>SharpAstrology.West</PackageId>
+        <PackageTags>Astrology</PackageTags>
+        <Version>0.1.0</Version>
+        <Authors>Christian Reizner</Authors>
+        <IsPackable>true</IsPackable>
+        <Description>
+            This package extends SharpAstrology with functions that are relevant for western astrology.
+        </Description>
+        <RepositoryUrl>https://github.com/CReizner/SharpAstrology.West</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/CReizner/SharpAstrology.West</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
     <ItemGroup>
-        <PackageReference Include="SharpAstrology.Base" Version="0.8.0" />
+        <PackageReference Include="SharpAstrology.Base" Version="[0.10.0,)" />
     </ItemGroup>
 
 </Project>

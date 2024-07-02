@@ -12,14 +12,14 @@ public static class WesternAstrologyDefaults
     /// <summary>
     /// The major and minor celestial bodies used by the default western astrology system.
     /// </summary>
-    public static readonly Planets[] DefaultPlanets = {
+    public static readonly Planets[] WesternDefaultPlanets = [
         Planets.Sun, Planets.Earth, Planets.Mars, Planets.Mercury,
         Planets.Venus, Planets.Moon, Planets.Jupiter, Planets.Saturn, 
         Planets.Uranus, Planets.Neptune, Planets.Pluto, 
-        Planets.NorthNode
-    };
+        Planets.NorthNode, Planets.SouthNode
+    ];
     
-    public static Dictionary<Aspects, ushort> DefaultOrbits { get; set; } = new()
+    public static readonly Dictionary<Aspects, int> DefaultOrbits = new()
     {
         [Aspects.Conjunction] = 6,
         [Aspects.Opposition] = 6,
@@ -31,7 +31,7 @@ public static class WesternAstrologyDefaults
         [Aspects.Quintile] = 3,
     };
 
-    public static Dictionary<Enum, Dictionary<Aspects, ushort>> PlanetsDefaultOrbits = new()
+    public static readonly Dictionary<Enum, Dictionary<Aspects, int>> PlanetsDefaultOrbits = new()
     {
         [Planets.Sun] = new()
         {
@@ -134,47 +134,5 @@ public static class WesternAstrologyDefaults
         }
     };
         
-    public static PlanetStates GetState(Planets planet, ZodiacSigns sign)
-    {
-        return planet switch
-        {
-            Planets.Sun when sign is ZodiacSigns.Leo => PlanetStates.Dominion,
-            Planets.Sun when sign is ZodiacSigns.Aries => PlanetStates.Exalted,
-            Planets.Sun when sign is ZodiacSigns.Aquarius => PlanetStates.Detriment,
-            Planets.Sun when sign is ZodiacSigns.Libra => PlanetStates.Fall,
-            Planets.Moon when sign is ZodiacSigns.Cancer => PlanetStates.Dominion,
-            Planets.Moon when sign is ZodiacSigns.Taurus => PlanetStates.Exalted,
-            Planets.Moon when sign is ZodiacSigns.Capricorn => PlanetStates.Detriment,
-            Planets.Moon when sign is ZodiacSigns.Scorpio => PlanetStates.Fall,
-            Planets.Mercury when sign is ZodiacSigns.Gemini => PlanetStates.Dominion,
-            Planets.Mercury when sign is ZodiacSigns.Virgo => PlanetStates.Exalted,
-            Planets.Mercury when sign is ZodiacSigns.Sagittarius => PlanetStates.Detriment,
-            Planets.Mercury when sign is ZodiacSigns.Pisces => PlanetStates.Fall,
-            Planets.Venus when sign is ZodiacSigns.Taurus => PlanetStates.Dominion,
-            Planets.Venus when sign is ZodiacSigns.Libra => PlanetStates.Dominion,
-            Planets.Venus when sign is ZodiacSigns.Pisces => PlanetStates.Exalted,
-            Planets.Venus when sign is ZodiacSigns.Aries or ZodiacSigns.Scorpio => PlanetStates.Detriment,
-            Planets.Venus when sign is ZodiacSigns.Virgo => PlanetStates.Fall,
-            Planets.Mars when sign is ZodiacSigns.Aries => PlanetStates.Dominion,
-            Planets.Mars when sign is ZodiacSigns.Capricorn => PlanetStates.Exalted,
-            Planets.Mars when sign is ZodiacSigns.Taurus or ZodiacSigns.Libra => PlanetStates.Detriment,
-            Planets.Jupiter when sign is ZodiacSigns.Sagittarius or ZodiacSigns.Pisces => PlanetStates.Dominion,
-            Planets.Jupiter when sign is ZodiacSigns.Cancer => PlanetStates.Exalted,
-            Planets.Jupiter when sign is ZodiacSigns.Gemini or ZodiacSigns.Virgo => PlanetStates.Detriment,
-            Planets.Jupiter when sign is ZodiacSigns.Capricorn => PlanetStates.Fall,
-            Planets.Saturn when sign is ZodiacSigns.Capricorn => PlanetStates.Dominion,
-            Planets.Saturn when sign is ZodiacSigns.Libra => PlanetStates.Exalted,
-            Planets.Saturn when sign is ZodiacSigns.Cancer or ZodiacSigns.Leo => PlanetStates.Detriment,
-            Planets.Saturn when sign is ZodiacSigns.Aries => PlanetStates.Fall,
-            Planets.Uranus when sign is ZodiacSigns.Aquarius => PlanetStates.Dominion,
-            Planets.Uranus when sign is ZodiacSigns.Scorpio => PlanetStates.Exalted,
-            Planets.Uranus when sign is ZodiacSigns.Leo => PlanetStates.Detriment,
-            Planets.Uranus when sign is ZodiacSigns.Taurus => PlanetStates.Fall,
-            Planets.Neptune when sign is ZodiacSigns.Pisces => PlanetStates.Dominion,
-            Planets.Neptune when sign is ZodiacSigns.Cancer => PlanetStates.Exalted,
-            Planets.Neptune when sign is ZodiacSigns.Virgo => PlanetStates.Detriment,
-            Planets.Neptune when sign is ZodiacSigns.Capricorn => PlanetStates.Fall,
-            _ => PlanetStates.None
-        };
-    }
+    
 }

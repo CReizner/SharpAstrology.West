@@ -5,7 +5,7 @@ namespace SharpAstrology.Utility;
 
 public sealed class OrbitBuilder : IOrbitBuilderLoader, IOrbitBuilder
 {
-    private Dictionary<Enum, Dictionary<Aspects, ushort>> _orbits = new();
+    private Dictionary<Enum, Dictionary<Aspects, int>> _orbits = new();
 
     public IOrbitBuilder UseDefaults()
     {
@@ -26,7 +26,7 @@ public sealed class OrbitBuilder : IOrbitBuilderLoader, IOrbitBuilder
         }
         else
         {
-            _orbits[planet] = new Dictionary<Aspects, ushort>() { [aspect] = orbit };
+            _orbits[planet] = new Dictionary<Aspects, int>() { [aspect] = orbit };
         }
         return this;
     }
@@ -41,7 +41,17 @@ public sealed class OrbitBuilder : IOrbitBuilderLoader, IOrbitBuilder
         return this;
     }
 
-    public Dictionary<Enum, Dictionary<Aspects, ushort>> ToOrbits() => _orbits;
+    public IOrbitBuilder SetRule(Planets planet, Aspects aspect, int orbit)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IOrbitBuilder SetRules(Planets planet, Dictionary<Aspects, int> orbits)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Dictionary<Enum, Dictionary<Aspects, int>> ToOrbits() => _orbits;
 
     private Planets PlanetFromString(string text)
     {
@@ -68,9 +78,9 @@ public sealed class OrbitBuilder : IOrbitBuilderLoader, IOrbitBuilder
 
 public interface IOrbitBuilder
 {
-    public IOrbitBuilder SetRule(Planets planet, Aspects aspect, ushort orbit);
-    public IOrbitBuilder SetRules(Planets planet, Dictionary<Aspects, ushort> orbits);
-    public Dictionary<Enum, Dictionary<Aspects, ushort>> ToOrbits();
+    public IOrbitBuilder SetRule(Planets planet, Aspects aspect, int orbit);
+    public IOrbitBuilder SetRules(Planets planet, Dictionary<Aspects, int> orbits);
+    public Dictionary<Enum, Dictionary<Aspects, int>> ToOrbits();
 }
 
 public interface IOrbitBuilderLoader
