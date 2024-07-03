@@ -104,7 +104,7 @@ public sealed class OrbitBuilder : IOrbitBuilder
         return this;
     }
 
-    public Dictionary<Enum, Dictionary<Aspects, int>> ToOrbits() => _orbits;
+    public Dictionary<Enum, Dictionary<Aspects, int>> ToOrbits() => _orbits.ToDictionary();
 }
 
 public interface IOrbitBuilder
