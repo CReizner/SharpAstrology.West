@@ -36,7 +36,7 @@ Console.WriteLine(aspect);
 
 // Use default western orbits explicitly
 var orbitBuilder = OrbitBuilder.WithWesternDefaultOrbits();
-var orbits = orbitBuilder.ToOrbits();
+var orbits = orbitBuilder.Build();
 aspect = chart.AspectBetween(Planets.Sun, Planets.SouthNode, orbits);
 Console.WriteLine(aspect);
 // Output: Conjunction
@@ -44,7 +44,7 @@ Console.WriteLine(aspect);
 // Change specific orbit definitions
 orbitBuilder.SetRule(Aspects.Conjunction, Planets.Sun, 1);
 orbitBuilder.SetRule(Aspects.Conjunction, Planets.SouthNode, 1);
-orbits = orbitBuilder.ToOrbits()
+orbits = orbitBuilder.Build()
 aspect = chart.AspectBetween(Planets.Sun, Planets.SouthNode, orbits);
 Console.WriteLine(aspect);
 // Output: None
@@ -52,5 +52,38 @@ Console.WriteLine(aspect);
 
 ### You can load orbits from json
 ````C#
+using SharpAstrology.DataModels;
+using SharpAstrology.Enums;
+using SharpAstrology.Ephemerides;
+using SharpAstrology.ExtensionMethods;
+using SharpAstrology.Utility;
 
+
+var date = new DateTime(1988, 9, 4, 1, 15, 0, DateTimeKind.Utc);
+using var eph = new SwissEphemeridesService("[PATH_TO_EPHEMERIDES_FILES]")
+    .CreateContext();
+
+// create chart
+var chart = new AstrologyChart(date, eph);
+
+// Define orbits with json string
+var orbitBuilder = OrbitBuilder.FromJsonString("""
+{
+    "conjunction": {
+        "sun": 10,
+        "southnode": 8,
+        "moon": 10
+    }
+}
+""");
+var orbits = orbitBuilder.Build();
+
+Console.WriteLine(chart.AspectBetween(Planets.Sun, Planets.SouthNode, orbits));
+//Output: Conjunction
+
+Console.WriteLine(chart.AspectBetween(Planets.Moon, Planets.SouthNode, orbits));
+//Moon: None
+
+// Will throw NotSupportedException, because Jupiter is not given in orbit table.
+Console.WriteLine(chart.AspectBetween(Planets.Jupiter, Planets.Sun, orbits));
 ````
