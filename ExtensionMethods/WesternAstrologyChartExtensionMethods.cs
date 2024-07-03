@@ -3,7 +3,7 @@ using SharpAstrology.DataModels;
 using SharpAstrology.Definitions;
 using SharpAstrology.Exceptions;
 using SharpAstrology.Utility;
-using Orbits = System.Collections.Generic.Dictionary<System.Enum, System.Collections.Generic.Dictionary<SharpAstrology.Enums.Aspects, int>>;
+using Orbits = System.Collections.Generic.Dictionary<SharpAstrology.Enums.Aspects, System.Collections.Generic.Dictionary<System.Enum, int>>;
 
 namespace SharpAstrology.ExtensionMethods;
 
@@ -47,10 +47,18 @@ public static class WesternAstrologyChartExtensionMethods
         orbits ??= WesternAstrologyDefaults.PlanetsDefaultOrbits;
         if (planet1 == planet2) return Aspects.None;
         var angle = AstrologyUtility.AngleDifference(chart.PositionOf(planet1).Longitude, chart.PositionOf(planet2).Longitude);
-        foreach (var aspect in Enum.GetValues<Aspects>())
+        foreach (var aspect in orbits.Keys)
         {
-            if (aspect == Aspects.None) continue;
-            var maxOrbit = Math.Max(orbits[planet1][aspect], orbits[planet2][aspect]);
+            var orbs = orbits[aspect];
+            if (!orbs.TryGetValue(planet1, out var orb1))
+            {
+                throw new NotSupportedException($"Object {planet1} not supported in orbit table for aspect {aspect}.");
+            }
+            if (!orbs.TryGetValue(planet2, out var orb2))
+            {
+                throw new NotSupportedException($"Object {planet2} not supported in orbit table for aspect {aspect}.");
+            }
+            var maxOrbit = Math.Max(orb1, orb2);
             var deg = aspect.ToAngle();
             var inAspect = deg - maxOrbit <= angle && angle <= deg + maxOrbit;
             if (inAspect) return aspect;
@@ -66,7 +74,7 @@ public static class WesternAstrologyChartExtensionMethods
         {
             result[planet] = chart.SupportedObjects.ToDictionary(p => p, p => chart.AspectBetween(p, planet, orbits));
         }
-
+    
         return result;
     }
 }

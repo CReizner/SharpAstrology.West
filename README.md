@@ -14,6 +14,7 @@
 
 In Western astrology, the distances between planets are assigned certain aspects. Each planet is assigned a certain range, an orbit. This package provides an OrbitBuilder to define these orbits freely.
 
+### YOu can use default orbits
 ```C#
 using SharpAstrology.DataModels;
 using SharpAstrology.Enums;
@@ -41,10 +42,15 @@ Console.WriteLine(aspect);
 // Output: Conjunction
 
 // Change specific orbit definitions
-orbitBuilder.SetRule(Planets.Sun, Aspects.Conjunction, 1);
-orbitBuilder.SetRule(Planets.SouthNode, Aspects.Conjunction, 1);
+orbitBuilder.SetRule(Aspects.Conjunction, Planets.Sun, 1);
+orbitBuilder.SetRule(Aspects.Conjunction, Planets.SouthNode, 1);
 orbits = orbitBuilder.ToOrbits()
 aspect = chart.AspectBetween(Planets.Sun, Planets.SouthNode, orbits);
 Console.WriteLine(aspect);
 // Output: None
 ```
+
+### You can load orbits from json
+````C#
+
+````
