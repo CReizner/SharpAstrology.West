@@ -64,7 +64,7 @@ public static class WesternAstrologyChartExtensionMethods
         var result = new Dictionary<Planets, Dictionary<Planets, Aspects>>();
         foreach (var planet in chart.SupportedObjects)
         {
-            result[planet] = chart.SupportedObjects.ToDictionary(p => p, p => chart.AspectBetween(planet, planet, orbits));
+            result[planet] = chart.SupportedObjects.ToDictionary(p => p, p => chart.AspectBetween(p, planet, orbits));
         }
 
         return result;

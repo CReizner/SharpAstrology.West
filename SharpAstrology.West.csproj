@@ -25,4 +25,10 @@
         <PackageReference Include="SharpAstrology.Base" Version="[0.10.0,)" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Assets\defaultOrbits.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

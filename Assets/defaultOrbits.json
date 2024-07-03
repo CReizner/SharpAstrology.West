@@ -1,0 +1,192 @@
+{
+  "sun": {
+    "conjunction": 8,
+    "opposition": 8,
+    "square": 8,
+    "sextile": 8,
+    "trine": 8,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "moon": {
+    "conjunction": 10,
+    "opposition": 10,
+    "square": 10,
+    "sextile": 10,
+    "trine": 10,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "mercury": {
+    "conjunction": 6,
+    "opposition": 6,
+    "square": 6,
+    "sextile": 6,
+    "trine": 6,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "venus": {
+    "conjunction": 6,
+    "opposition": 6,
+    "square": 6,
+    "sextile": 6,
+    "trine": 6,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "mars": {
+    "conjunction": 6,
+    "opposition": 6,
+    "square": 6,
+    "sextile": 6,
+    "trine": 6,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "jupiter": {
+    "conjunction": 6,
+    "opposition": 6,
+    "square": 6,
+    "sextile": 6,
+    "trine": 6,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "saturn": {
+    "conjunction": 6,
+    "opposition": 6,
+    "square": 6,
+    "sextile": 6,
+    "trine": 6,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "uranus": {
+    "conjunction": 6,
+    "opposition": 6,
+    "square": 6,
+    "sextile": 6,
+    "trine": 6,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "neptune": {
+    "conjunction": 6,
+    "opposition": 6,
+    "square": 6,
+    "sextile": 6,
+    "trine": 6,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "pluto": {
+    "conjunction": 6,
+    "opposition": 6,
+    "square": 6,
+    "sextile": 6,
+    "trine": 6,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "northnode": {
+    "conjunction": 6,
+    "opposition": 6,
+    "square": 6,
+    "sextile": 6,
+    "trine": 6,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "southnode": {
+    "conjunction": 6,
+    "opposition": 6,
+    "square": 6,
+    "sextile": 6,
+    "trine": 6,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "chiron": {
+    "conjunction": 6,
+    "opposition": 6,
+    "square": 6,
+    "sextile": 6,
+    "trine": 6,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "earth": {
+    "conjunction": 8,
+    "opposition": 8,
+    "square": 8,
+    "sextile": 8,
+    "trine": 8,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "asc": {
+    "conjunction": 10,
+    "opposition": 10,
+    "square": 10,
+    "sextile": 10,
+    "trine": 10,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "ic": {
+    "conjunction": 10,
+    "opposition": 10,
+    "square": 10,
+    "sextile": 10,
+    "trine": 10,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "dc": {
+    "conjunction": 10,
+    "opposition": 10,
+    "square": 10,
+    "sextile": 10,
+    "trine": 10,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "mc": {
+    "conjunction": 10,
+    "opposition": 10,
+    "square": 10,
+    "sextile": 10,
+    "trine": 10,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  },
+  "vertex": {
+    "conjunction": 8,
+    "opposition": 8,
+    "square": 8,
+    "sextile": 8,
+    "trine": 8,
+    "semisextile": 3,
+    "quincunx": 3,
+    "quintile": 3
+  }
+}
