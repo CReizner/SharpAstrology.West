@@ -14,7 +14,7 @@
 
 In Western astrology, the distances between planets are assigned certain aspects. Each planet is assigned a certain range, an orbit. This package provides an OrbitBuilder to define these orbits freely.
 
-### YOu can use default orbits
+### You can use default orbits
 ```C#
 using SharpAstrology.DataModels;
 using SharpAstrology.Enums;
@@ -87,3 +87,36 @@ Console.WriteLine(chart.AspectBetween(Planets.Moon, Planets.SouthNode, orbits));
 // Will throw NotSupportedException, because Jupiter is not given in orbit table.
 Console.WriteLine(chart.AspectBetween(Planets.Jupiter, Planets.Sun, orbits));
 ````
+#### The structure of the json needs to look like this:
+```json
+{
+  "aspect": {
+    "planet": orbit,
+    "planet": orbit,
+    ...
+  },
+  "aspect": {
+    "planet": orbit,
+    "planet": orbit,
+    ...
+  },
+  ...
+}
+```
+#### The mapping to the enums is listed in the table below:
+|           Planets | json      |        Cross | json   |             Aspects | json        |
+|------------------:|:----------|-------------:|:-------|--------------------:|:------------|
+|       Planets.Sun | sun       |    Cross.Asc | asc    | Aspects.Conjunction | conjunction |
+|      Planets.Moon | moon      |     Cross.Mc | nc     |  Aspects.Opposition | opposition  |
+|   Planets.Mercury | mercury   |     Cross.Ic | ic     |      Aspects.Square | square      |
+|     Planets.Venus | venus     |     Cross.Dc | dc     |       Aspects.Trine | trine       |
+|      Planets.Mars | mars      | Cross.Vertex | vertex | Aspects.SemiSextile | semisextile |
+|   Planets.Jupiter | jupiter   |              |        |    Aspects.Quincunx | quincunx    |
+|    Planets.Saturn | saturn    |              |        |    Aspects.Quintile | quintile    |
+|    Planets.Uranus | uranus    |              |        |                     |             |
+|   Planets.Neptune | neptune   |              |        |                     |             |
+|     Planets.Pluto | pluto     |              |        |                     |             |
+| Planets.NorthNode | northnode |              |        |                     |             |
+| Planets.SouthNode | southnode |              |        |                     |             |
+|    Planets.Chiron | chiron    |              |        |                     |             |
+|     Planets.Earth | earth     |              |        |                     |             |
