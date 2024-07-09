@@ -3,7 +3,7 @@ using SharpAstrology.DataModels;
 using SharpAstrology.Definitions;
 using SharpAstrology.Exceptions;
 using SharpAstrology.Utility;
-using Orbits = System.Collections.Generic.Dictionary<SharpAstrology.Enums.Aspects, System.Collections.Generic.Dictionary<System.Enum, int>>;
+using Orbits = System.Collections.Generic.IDictionary<SharpAstrology.Enums.Aspects, System.Collections.Generic.Dictionary<SharpAstrology.Enums.Planets, int>>;
 
 namespace SharpAstrology.ExtensionMethods;
 
@@ -72,7 +72,7 @@ public static class WesternAstrologyChartExtensionMethods
         var result = new Dictionary<Planets, Dictionary<Planets, Aspects>>();
         foreach (var planet in chart.SupportedObjects)
         {
-            result[planet] = chart.SupportedObjects.ToDictionary(p => p, p => chart.AspectBetween(p, planet, orbits));
+            result[planet] = chart.SupportedObjects.ToDictionary(p => p, p => chart.AspectBetween(planet, p, orbits));
         }
     
         return result;

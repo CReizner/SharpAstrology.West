@@ -20,7 +20,7 @@ public static class WesternAstrologyDefaults
         Planets.NorthNode, Planets.SouthNode
     ];
 
-    public static readonly Dictionary<Aspects, Dictionary<Enum, int>> PlanetsDefaultOrbits =
+    public static readonly IDictionary<Aspects, Dictionary<Planets, int>> PlanetsDefaultOrbits =
         OrbitBuilder.WithWesternDefaultOrbits().Build();
 
 

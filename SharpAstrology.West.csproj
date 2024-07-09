@@ -22,13 +22,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="SharpAstrology.Base" Version="*" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Update="Assets\defaultOrbits.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SharpAstrology.Base\SharpAstrology.Base.csproj" />
     </ItemGroup>
 
 </Project>
