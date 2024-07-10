@@ -14,7 +14,7 @@ public sealed class OrbitBuilder : IOrbitBuilder
         _orbits = orbits;
     }
 
-    public static IOrbitBuilder Empty() => new OrbitBuilder(new());
+    public static IOrbitBuilder Empty() => new OrbitBuilder(new Dictionary<Aspects, Dictionary<Planets, int>>());
     
     public static IOrbitBuilder WithWesternDefaultOrbits()
     {
@@ -102,7 +102,7 @@ public sealed class OrbitBuilder : IOrbitBuilder
     /// <summary>
     /// Builds and returns the orbits dictionary.
     /// </summary>
-    public IDictionary<Aspects, Dictionary<Planets, int>> Build() => _orbits.ToFrozenDictionary();
+    public Dictionary<Aspects, Dictionary<Planets, int>> Build() => _orbits.ToDictionary();
     
     
     private static Aspects ConvertToAspect(string text) => text switch
@@ -148,5 +148,5 @@ public interface IOrbitBuilder
     public IOrbitBuilder SetRule(Aspects aspect, Planets planet, int orbit);
     public IOrbitBuilder SetRules(Aspects aspect, Dictionary<Planets, int> orbits);
     public IOrbitBuilder SetRulesFromJson(string json);
-    public IDictionary<Aspects, Dictionary<Planets, int>> Build();
+    public Dictionary<Aspects, Dictionary<Planets, int>> Build();
 }
