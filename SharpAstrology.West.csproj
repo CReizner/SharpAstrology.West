@@ -22,13 +22,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Update="Assets\defaultOrbits.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+        <None Include="Assets\defaultOrbits.json" CopyToOutputDirectory="PreserveNewest" Pack="true" />
+        <None Include="README.md" Pack="true" PackagePath="$(PackageReadmeFile)" CopyToOutputDirectory="Always"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SharpAstrology.Base\SharpAstrology.Base.csproj" />
+      <PackageReference Include="SharpAstrology.Base" Version="*" />
     </ItemGroup>
 
 </Project>
