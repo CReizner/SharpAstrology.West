@@ -9,8 +9,8 @@ ${\color{red}This \space package \space is \space still \space experimental. \sp
 | [SharpAstrology.HumanDesign](https://github.com/CReizner/SharpAstrology.HumanDesign)                                   |  1.1.0  | Extensions for the Human Design system        |   MIT    |
 | [SharpAstrology.HumanDesign.BlazorComponents](https://github.com/CReizner/SharpAstrology.HumanDesign.BlazorComponents) |  0.2.1  | Human Design charts as Blazor components      |   MIT    |
 | [SharpAstrology.Vedic](https://github.com/CReizner/SharpAstrology.Vedic)                                               |  0.1.0  | Extensions for Vedic astrology systems        |   MIT    |
-| [SharpAstrology.West](https://github.com/CReizner/SharpAstrology.West)                                                 |  0.1.0-preview1  | Extensions for western astrology systems      |   MIT    |
-| [SharpAstrology.West.BlazorComponents](https://github.com/CReizner/SharpAstrology.West.BlazorComponents)               |  0.1.0-preview1  | Western astrology charts as Blazor components |   MIT    |
+| [SharpAstrology.West](https://github.com/CReizner/SharpAstrology.West)                                                 |  0.1.0-preview.2  | Extensions for western astrology systems      |   MIT    |
+| [SharpAstrology.West.BlazorComponents](https://github.com/CReizner/SharpAstrology.West.BlazorComponents)               |  0.1.0-preview.1  | Western astrology charts as Blazor components |   MIT    |
 
 ## Calculate aspects with defined orbits
 
@@ -122,3 +122,10 @@ Console.WriteLine(chart.AspectBetween(Planets.Jupiter, Planets.Sun, orbits));
 | Planets.SouthNode | southnode |              |        |                     |             |
 |    Planets.Chiron | chiron    |              |        |                     |             |
 |     Planets.Earth | earth     |              |        |                     |             |
+
+## Visualizing a chart
+
+SharpAstrology offers a package that allows you to visualize your AstrologyChart via a Blazor component. 
+See the project [SharpAstrology.West.BlazorComponents](https://github.com/CReizner/SharpAstrology.West.BlazorComponents).
+
+![Astro Chart](https://github.com/CReizner/SharpAstrology.West.BlazorComponents/blob/main/.github_assets/astro_chart_with_transits.png)
