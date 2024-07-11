@@ -1,7 +1,7 @@
 # SharpAstrology.West
 ${\color{red}This \space package \space is \space still \space experimental. \space Interfaces \space can \space change \space before \space version \space 1.0.0.}$
 
-<--PACKAGE-->
+<--PACKAGES-->
 
 ## Calculate aspects with defined orbits
 
