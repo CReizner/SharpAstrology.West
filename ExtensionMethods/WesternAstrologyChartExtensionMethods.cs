@@ -1,9 +1,10 @@
+using System.Diagnostics;
 using SharpAstrology.Enums;
 using SharpAstrology.DataModels;
 using SharpAstrology.Definitions;
 using SharpAstrology.Exceptions;
 using SharpAstrology.Utility;
-using Orbits = System.Collections.Generic.IDictionary<SharpAstrology.Enums.Aspects, System.Collections.Generic.Dictionary<SharpAstrology.Enums.Planets, int>>;
+using Orbits = System.Collections.Generic.Dictionary<SharpAstrology.Enums.Aspects, System.Collections.Generic.Dictionary<SharpAstrology.Enums.Planets, int>>;
 
 namespace SharpAstrology.ExtensionMethods;
 
@@ -16,7 +17,8 @@ public static class WesternAstrologyChartExtensionMethods
         {
             < 10 => Decanates.First,
             < 20 and >= 10 => Decanates.Second,
-            < 30 and >= 20 => Decanates.Third
+            < 30 and >= 20 => Decanates.Third,
+            _ => throw new UnreachableException()
         };
     }
     
@@ -27,7 +29,8 @@ public static class WesternAstrologyChartExtensionMethods
         {
             < 10 => Decanates.First,
             < 20 and >= 10 => Decanates.Second,
-            < 30 and >= 20 => Decanates.Third
+            < 30 and >= 20 => Decanates.Third,
+            _ => throw new UnreachableException()
         };
     }
     
@@ -38,13 +41,14 @@ public static class WesternAstrologyChartExtensionMethods
         {
             < 10 => Decanates.First,
             < 20 and >= 10 => Decanates.Second,
-            < 30 and >= 20 => Decanates.Third
+            < 30 and >= 20 => Decanates.Third,
+            _ => throw new UnreachableException()
         };
     }
 
     public static Aspects AspectBetween(this AstrologyChart chart, Planets planet1, Planets planet2, Orbits? orbits=null)
     {
-        orbits ??= WesternAstrologyDefaults.PlanetsDefaultOrbits;
+        orbits ??= WesternAstrologyDefaults.WesternDefaultOrbits;
         if (planet1 == planet2) return Aspects.None;
         var angle = AstrologyUtility.AngleDifference(chart.PositionOf(planet1).Longitude, chart.PositionOf(planet2).Longitude);
         foreach (var aspect in orbits.Keys)
@@ -68,7 +72,7 @@ public static class WesternAstrologyChartExtensionMethods
 
     public static Dictionary<Planets, Dictionary<Planets, Aspects>> CalculateAspects(this AstrologyChart chart, Orbits? orbits=null)
     {
-        orbits ??= WesternAstrologyDefaults.PlanetsDefaultOrbits;
+        orbits ??= WesternAstrologyDefaults.WesternDefaultOrbits;
         var result = new Dictionary<Planets, Dictionary<Planets, Aspects>>();
         foreach (var planet in chart.SupportedObjects)
         {

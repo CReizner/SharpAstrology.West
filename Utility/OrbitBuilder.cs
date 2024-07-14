@@ -1,6 +1,7 @@
 using System.Collections.Frozen;
 using System.Text.Json;
-
+using SharpAstrology.DataModels;
+using SharpAstrology.Definitions;
 using SharpAstrology.Enums;
 
 namespace SharpAstrology.Utility;
@@ -11,15 +12,17 @@ public sealed class OrbitBuilder : IOrbitBuilder
 
     private OrbitBuilder(Dictionary<Aspects, Dictionary<Planets, int>> orbits)
     {
-        _orbits = orbits;
+        _orbits = orbits.ToDictionary();
     }
 
-    public static IOrbitBuilder Empty() => new OrbitBuilder(new Dictionary<Aspects, Dictionary<Planets, int>>());
-    
+    public static IOrbitBuilder Empty()
+    {
+        return new OrbitBuilder(new Dictionary<Aspects, Dictionary<Planets, int>>());
+    }
+
     public static IOrbitBuilder WithWesternDefaultOrbits()
     {
-        var json = File.ReadAllText(Path.Join(AppContext.BaseDirectory, "Assets", "defaultOrbits.json"));
-        return FromJsonString(json);
+        return new OrbitBuilder(WesternAstrologyDefaults.WesternDefaultOrbits);
     }
 
     public static IOrbitBuilder FromJsonFile(string path)
@@ -61,11 +64,6 @@ public sealed class OrbitBuilder : IOrbitBuilder
         return this;
     }
     
-    /// <summary>
-    /// Sets orbit rules for multiple planets within a specific aspect.
-    /// </summary>
-    /// <param name="aspect">The aspect to set the rules for.</param>
-    /// <param name="orbits">A dictionary of planets and their orbits.</param>
     public IOrbitBuilder SetRules(Aspects aspect, Dictionary<Planets, int> orbits)
     {
         foreach (var (p, orbit) in orbits)
@@ -75,11 +73,7 @@ public sealed class OrbitBuilder : IOrbitBuilder
         
         return this;
     }
-
-    /// <summary>
-    /// Sets orbit rules for multiple aspects and planets from a JSON string.
-    /// </summary>
-    /// <param name="json">The JSON string containing aspect and planet orbits.</param>
+    
     public IOrbitBuilder SetRulesFromJson(string json)
     {
         using var doc = JsonDocument.Parse(json);
@@ -98,10 +92,7 @@ public sealed class OrbitBuilder : IOrbitBuilder
 
         return this;
     }
-
-    /// <summary>
-    /// Builds and returns the orbits dictionary.
-    /// </summary>
+    
     public Dictionary<Aspects, Dictionary<Planets, int>> Build() => _orbits.ToDictionary();
     
     
@@ -146,7 +137,22 @@ public sealed class OrbitBuilder : IOrbitBuilder
 public interface IOrbitBuilder
 {
     public IOrbitBuilder SetRule(Aspects aspect, Planets planet, int orbit);
+    
+    /// <summary>
+    /// Sets orbit rules for multiple planets within a specific aspect.
+    /// </summary>
+    /// <param name="aspect">The aspect to set the rules for.</param>
+    /// <param name="orbits">A dictionary of planets and their orbits.</param>
     public IOrbitBuilder SetRules(Aspects aspect, Dictionary<Planets, int> orbits);
+    
+    /// <summary>
+    /// Sets orbit rules for multiple aspects and planets from a JSON string.
+    /// </summary>
+    /// <param name="json">The JSON string containing aspect and planet orbits.</param>
     public IOrbitBuilder SetRulesFromJson(string json);
+    
+    /// <summary>
+    /// Builds and returns the orbits dictionary.
+    /// </summary>
     public Dictionary<Aspects, Dictionary<Planets, int>> Build();
 }

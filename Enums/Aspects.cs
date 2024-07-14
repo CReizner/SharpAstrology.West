@@ -30,6 +30,7 @@ public static class AspectsExtensionMethods
             Aspects.SemiSextile => 30,
             Aspects.Quincunx => 150,
             Aspects.Quintile => 72,
+            _ => throw new NotSupportedException($"Aspect {aspect} not supported in this function.")
         };
     }
 }
