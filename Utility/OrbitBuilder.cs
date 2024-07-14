@@ -12,7 +12,7 @@ public sealed class OrbitBuilder : IOrbitBuilder
 
     private OrbitBuilder(Dictionary<Aspects, Dictionary<Planets, int>> orbits)
     {
-        _orbits = orbits.ToDictionary();
+        _orbits = orbits.ToDictionary(x=>x.Key, x=>x.Value.ToDictionary());
     }
 
     public static IOrbitBuilder Empty()

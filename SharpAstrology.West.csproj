@@ -9,7 +9,7 @@
     <PropertyGroup>
         <PackageId>SharpAstrology.West</PackageId>
         <PackageTags>Astrology</PackageTags>
-        <Version>0.1.0-preview.3</Version>
+        <Version>0.1.0-preview.4</Version>
         <Authors>Christian Reizner</Authors>
         <IsPackable>true</IsPackable>
         <Description>
