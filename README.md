@@ -106,22 +106,22 @@ Console.WriteLine(chart.AspectBetween(Planets.Jupiter, Planets.Sun, orbits));
 }
 ```
 #### The mapping to the enums is listed in the table below:
-|           Planets | json      |        Cross | json   |             Aspects | json        |
-|------------------:|:----------|-------------:|:-------|--------------------:|:------------|
-|       Planets.Sun | sun       |    Cross.Asc | asc    | Aspects.Conjunction | conjunction |
-|      Planets.Moon | moon      |     Cross.Mc | nc     |  Aspects.Opposition | opposition  |
-|   Planets.Mercury | mercury   |     Cross.Ic | ic     |      Aspects.Square | square      |
-|     Planets.Venus | venus     |     Cross.Dc | dc     |       Aspects.Trine | trine       |
-|      Planets.Mars | mars      | Cross.Vertex | vertex | Aspects.SemiSextile | semisextile |
-|   Planets.Jupiter | jupiter   |              |        |    Aspects.Quincunx | quincunx    |
-|    Planets.Saturn | saturn    |              |        |    Aspects.Quintile | quintile    |
-|    Planets.Uranus | uranus    |              |        |                     |             |
-|   Planets.Neptune | neptune   |              |        |                     |             |
-|     Planets.Pluto | pluto     |              |        |                     |             |
-| Planets.NorthNode | northnode |              |        |                     |             |
-| Planets.SouthNode | southnode |              |        |                     |             |
-|    Planets.Chiron | chiron    |              |        |                     |             |
-|     Planets.Earth | earth     |              |        |                     |             |
+|           Planets | json      |             Aspects | json        |
+|------------------:|:----------|--------------------:|:------------|
+|       Planets.Sun | sun       | Aspects.Conjunction | conjunction |
+|      Planets.Moon | moon      |  Aspects.Opposition | opposition  |
+|   Planets.Mercury | mercury   |      Aspects.Square | square      |
+|     Planets.Venus | venus     |       Aspects.Trine | trine       |
+|      Planets.Mars | mars      | Aspects.SemiSextile | semisextile |
+|   Planets.Jupiter | jupiter   |    Aspects.Quincunx | quincunx    |
+|    Planets.Saturn | saturn    |    Aspects.Quintile | quintile    |
+|    Planets.Uranus | uranus    |                     |             |
+|   Planets.Neptune | neptune   |                     |             |
+|     Planets.Pluto | pluto     |                     |             |
+| Planets.NorthNode | northnode |                     |             |
+| Planets.SouthNode | southnode |                     |             |
+|    Planets.Chiron | chiron    |                     |             |
+|     Planets.Earth | earth     |                     |             |
 
 ## Visualizing a chart
 
