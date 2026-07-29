@@ -9,7 +9,7 @@
     <PropertyGroup>
         <PackageId>SharpAstrology.West</PackageId>
         <PackageTags>Astrology</PackageTags>
-        <Version>0.1.0-preview.4</Version>
+        <Version>0.1.0</Version>
         <Authors>Christian Reizner</Authors>
         <IsPackable>true</IsPackable>
         <Description>
@@ -22,11 +22,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="$(PackageReadmeFile)" CopyToOutputDirectory="Always"/>
+        <None Include="README.md" Pack="true" PackagePath="$(PackageReadmeFile)"/>
+    </ItemGroup>
+    
+    <PropertyGroup>
+        <SharpAstrologyBaseVersion>[0.13.0,)</SharpAstrologyBaseVersion>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('..\SharpAstrology.Base\SharpAstrology.Base.csproj')">
+        <ProjectReference Include="..\SharpAstrology.Base\SharpAstrology.Base.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="SharpAstrology.Base" Version="*" />
+    <ItemGroup Condition="!Exists('..\SharpAstrology.Base\SharpAstrology.Base.csproj')">
+        <PackageReference Include="SharpAstrology.Base" Version="$(SharpAstrologyBaseVersion)" />
     </ItemGroup>
 
 </Project>
