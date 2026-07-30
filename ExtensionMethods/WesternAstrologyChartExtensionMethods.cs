@@ -11,6 +11,9 @@ namespace SharpAstrology.ExtensionMethods;
 
 public static class WesternAstrologyChartExtensionMethods
 {
+    /// <summary>
+    /// The third of the division the planet stands in.
+    /// </summary>
     public static Decanates DecanateOf(this AstrologyChart chart, Planets planet)
     {
         return (chart.PositionOf(planet).Longitude % 30) switch
@@ -22,6 +25,10 @@ public static class WesternAstrologyChartExtensionMethods
         };
     }
     
+    /// <summary>
+    /// The third of the division the direction of the cross stands in, in the zodiac of the chart.
+    /// </summary>
+    /// <exception cref="HousesNotAvailableException">The chart carries no house data.</exception>
     public static Decanates DecanateOf(this AstrologyChart chart, Cross direction)
     {
         if (chart.HousePositions is null) throw new HousesNotAvailableException();
@@ -34,6 +41,10 @@ public static class WesternAstrologyChartExtensionMethods
         };
     }
     
+    /// <summary>
+    /// The third of the division the house cusp stands in, in the zodiac of the chart.
+    /// </summary>
+    /// <exception cref="HousesNotAvailableException">The chart carries no house data.</exception>
     public static Decanates DecanateOf(this AstrologyChart chart, Houses house)
     {
         if (chart.HousePositions is null) throw new HousesNotAvailableException();

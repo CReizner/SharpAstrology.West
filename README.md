@@ -126,6 +126,19 @@ Console.WriteLine(chart.AspectBetween(Planets.Jupiter, Planets.Sun, orbits));
 |    Planets.Chiron | chiron    |                     |             |
 |     Planets.Earth | earth     |                     |             |
 
+## Which zodiac do the decanates use?
+`DecanateOf` divides the division a planet, an axis or a house cusp stands in into three parts. It
+counts in the zodiac of the chart. A chart stands in exactly one zodiac and `chart.CalculationMode`
+says which one, so a chart built with `EphCalculationMode.Sidereal` gives thirds of a constellation
+and a tropically calculated chart gives thirds of a sign.
+
+```C#
+using SharpAstrology.ExtensionMethods;
+...
+var chart = new AstrologyChart(pointInTime, eph, 51.0, 11.0, mode: EphCalculationMode.Sidereal);
+var decanate = chart.DecanateOf(Planets.Sun);
+```
+
 ## Visualizing a chart
 
 SharpAstrology offers a package that allows you to visualize your AstrologyChart via a Blazor component. 

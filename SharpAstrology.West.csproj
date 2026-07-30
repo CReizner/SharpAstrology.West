@@ -9,7 +9,8 @@
     <PropertyGroup>
         <PackageId>SharpAstrology.West</PackageId>
         <PackageTags>Astrology</PackageTags>
-        <Version>0.1.0</Version>
+        <Version>0.2.0</Version>
+        <PackageReleaseNotes>0.2.0: DecanateOf is documented to count in the zodiac of the chart. A chart carries exactly one zodiac since SharpAstrology.Base 0.14.0, and CalculationMode says which one, so a sidereally calculated chart gives thirds of a constellation. No behaviour changed, the floor on SharpAstrology.Base moved to 0.14.0.</PackageReleaseNotes>
         <Authors>Christian Reizner</Authors>
         <IsPackable>true</IsPackable>
         <Description>
@@ -26,7 +27,7 @@
     </ItemGroup>
     
     <PropertyGroup>
-        <SharpAstrologyBaseVersion>[0.13.0,)</SharpAstrologyBaseVersion>
+        <SharpAstrologyBaseVersion>[0.14.0,)</SharpAstrologyBaseVersion>
     </PropertyGroup>
 
     <ItemGroup Condition="Exists('..\SharpAstrology.Base\SharpAstrology.Base.csproj')">
